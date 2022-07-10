@@ -10,11 +10,14 @@ import UIKit
 class ViewController: UITableViewController {
     
     var pictures = [String]()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        title = "Storm View"
+        navigationController?.navigationBar.prefersLargeTitles = true
         
         let fm = FileManager.default
         let path = Bundle.main.resourcePath!
@@ -29,9 +32,9 @@ class ViewController: UITableViewController {
         }
         
         print(pictures)
-        print("zort")
+        //print("zort")
         print(path)
-        print(items)
+        //print(items)
         
         
         
@@ -49,6 +52,12 @@ class ViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
+            vc.selectedImage = pictures[indexPath.row]
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
     
 
 
